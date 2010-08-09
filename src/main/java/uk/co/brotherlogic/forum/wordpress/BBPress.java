@@ -73,6 +73,10 @@ public class BBPress
 		PreparedStatement ps = getPreparedStatement("DELETE FROM bb_forums");
 		ps.execute();
 		ps.close();
+
+		PreparedStatement ps2 = getPreparedStatement("DELETE FROM bb_topics");
+		ps2.execute();
+		ps2.close();
 	}
 
 }

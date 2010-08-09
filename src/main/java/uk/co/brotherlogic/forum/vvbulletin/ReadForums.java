@@ -33,6 +33,7 @@ public class ReadForums
 
 			forums.add(f);
 		}
+		rs.close();
 
 		PreparedStatement ps2 = VVBulletin
 				.getConnection()
@@ -49,6 +50,7 @@ public class ReadForums
 
 			forums.add(f);
 		}
+		rs2.close();
 
 		return forums;
 	}

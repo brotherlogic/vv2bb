@@ -24,6 +24,11 @@ public class ReadUsers
 			users.add(user);
 		}
 
+		// Create the mystery user
+		users.add(new User(0, "Mystery", "Mystery", "mystery@mystery.com"));
+
+		rs.close();
+
 		return users;
 	}
 

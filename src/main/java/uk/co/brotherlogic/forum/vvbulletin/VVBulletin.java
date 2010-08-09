@@ -57,7 +57,7 @@ public class VVBulletin
 
 			System.err.println("Connecting to production database");
 			locDB = DriverManager
-					.getConnection("jdbc:mysql://192.168.1.100/vinylvulture?user=vinylvulture&password=vinylvulture");
+					.getConnection("jdbc:mysql://localhost/vinylvulture?user=vinylvulture&password=vinylvulture");
 
 			// Switch off auto commit
 			locDB.setAutoCommit(false);

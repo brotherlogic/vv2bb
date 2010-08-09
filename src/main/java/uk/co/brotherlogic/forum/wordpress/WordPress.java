@@ -77,6 +77,7 @@ public class WordPress
 		PreparedStatement ps2 = getPreparedStatement("DELETE FROM wp_usermeta WHERE user_id > 1");
 		ps2.execute();
 		ps2.close();
+
 	}
 
 }
