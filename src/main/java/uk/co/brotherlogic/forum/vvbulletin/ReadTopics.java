@@ -13,11 +13,13 @@ import uk.co.brotherlogic.forum.atoms.Topic;
 import uk.co.brotherlogic.forum.atoms.User;
 import uk.co.brotherlogic.forum.wordpress.WPUsers;
 
-public class ReadTopics {
+public class ReadTopics
+{
 	WPUsers users = new WPUsers();
 
 	public List<Topic> readTopics(Map<Integer, User> userMap,
-			Map<Integer, Forum> forumMap) throws SQLException {
+			Map<Integer, Forum> forumMap) throws SQLException
+	{
 		List<Topic> topics = new LinkedList<Topic>();
 
 		PreparedStatement ps = VVBulletin
@@ -25,14 +27,16 @@ public class ReadTopics {
 				.getPreparedStatement(
 						"SELECT title, postuserid,dateline,lastpost,forumid,lastpostid,sticky,replycount, postusername, threadid FROM thread");
 		ResultSet rs = ps.executeQuery();
-		while (rs.next()) {
+		while (rs.next())
+		{
 			Topic t = new Topic();
 			t.setTitle(rs.getString(1));
 
-			if (userMap.get(rs.getInt(2)) == null) {
+			if (userMap.get(rs.getInt(2)) == null)
+			{
 				// Can't find the user - create them on the fly
-				User user = new User(rs.getInt(2), rs.getString(8),
-						rs.getString(9), "noemail@noemail.com");
+				User user = new User(rs.getInt(2), rs.getString(8), rs
+						.getString(9), "noemail@noemail.com");
 				t.setUser(user);
 				users.storeUser(user);
 			} else

@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import uk.co.brotherlogic.forum.atoms.Forum;
-import uk.co.brotherlogic.forum.atoms.Post;
 import uk.co.brotherlogic.forum.atoms.Topic;
 import uk.co.brotherlogic.forum.atoms.User;
 import uk.co.brotherlogic.forum.vvbulletin.ReadForums;
@@ -81,10 +80,10 @@ public class Transfer
 		for (Topic t : topics)
 			tMap.put(t.getVvID(), t);
 
-		List<Post> posts = rPosts.readPosts(uMap, fMap, tMap);
-		System.out.println("Read " + posts.size() + " posts");
-		for (Post post : posts)
-			wpPosts.storePost(post);
+		rPosts.readPosts(uMap, fMap, tMap);
+		System.out.println("Read  posts");
+		for (Topic t : topics)
+			wpPosts.storePost(t.getPosts());
 
 	}
 }

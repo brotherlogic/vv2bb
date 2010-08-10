@@ -1,6 +1,8 @@
 package uk.co.brotherlogic.forum.atoms;
 
 import java.util.Date;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Topic
 {
@@ -11,8 +13,19 @@ public class Topic
 	Date postStart;
 	Date lastPostTime;
 	Forum forum;
+	Set<Post> posts = new TreeSet<Post>();
 	boolean sticky;
 	int replyCount;
+
+	public void addPost(Post p)
+	{
+		posts.add(p);
+	}
+
+	public Set<Post> getPosts()
+	{
+		return posts;
+	}
 
 	public int getVvID()
 	{

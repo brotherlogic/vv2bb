@@ -36,6 +36,28 @@
             <target>1.6</target>
 	  </configuration>
 	</plugin>
+	
+	<plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>1.1</version>
+          <executions>
+            <execution>
+              <goals>
+		<goal>exec</goal>
+              </goals>
+            </execution>
+	  </executions>
+          <configuration>
+            <mainClass>uk.co.brotherlogic.forum.Transfer</mainClass>
+	    <arguments>
+              <argument>-Xmx=1024M</argument>
+	    </arguments>
+          </configuration>
+	  
+	</plugin>
+	
+	
 	</plugins>
   </pluginManagement>
   </build>

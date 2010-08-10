@@ -2,8 +2,14 @@ package uk.co.brotherlogic.forum.atoms;
 
 import java.util.Date;
 
-public class Post
+public class Post implements Comparable<Post>
 {
+	@Override
+	public int compareTo(Post o)
+	{
+		return postTime.compareTo(o.postTime);
+	}
+
 	int wpID;
 	int vvID;
 	Forum forum;
