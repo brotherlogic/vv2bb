@@ -4,14 +4,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
 
 import uk.co.brotherlogic.forum.atoms.Post;
 
-public class WPPosts
-{
-	public int storePost(Post p) throws SQLException
-	{
+public class WPPosts {
+	public int storePost(Post p) throws SQLException {
 		PreparedStatement ps = BBPress
 				.getConnection()
 				.getPreparedStatement(
@@ -19,7 +16,6 @@ public class WPPosts
 		ps.setInt(1, p.getTopic().getWpID());
 		ps.setInt(2, p.getForum().getWpID());
 		ps.setInt(3, p.getPoster().getWp_userid());
-		DateFormat df = DateFormat.getDateTimeInstance();
 		ps.setDate(4, new Date(p.getPostTime().getTime()));
 		ps.setString(5, p.getText());
 		ps.setString(6, p.getIp());

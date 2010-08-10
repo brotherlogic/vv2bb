@@ -12,16 +12,11 @@ import uk.co.brotherlogic.forum.atoms.Forum;
 import uk.co.brotherlogic.forum.atoms.Post;
 import uk.co.brotherlogic.forum.atoms.Topic;
 import uk.co.brotherlogic.forum.atoms.User;
-import uk.co.brotherlogic.forum.wordpress.WPUsers;
 
-public class ReadPosts
-{
-	WPUsers users = new WPUsers();
-
+public class ReadPosts {
 	public List<Post> readPosts(Map<Integer, User> userMap,
 			Map<Integer, Forum> forumMap, Map<Integer, Topic> topicMap)
-			throws SQLException
-	{
+			throws SQLException {
 		List<Post> posts = new LinkedList<Post>();
 
 		PreparedStatement ps = VVBulletin
@@ -29,8 +24,7 @@ public class ReadPosts
 				.getPreparedStatement(
 						"SELECT postid,threadid,userid,dateline,pagetext,ipaddress FROM post");
 		ResultSet rs = ps.executeQuery();
-		while (rs.next())
-		{
+		while (rs.next()) {
 			Post p = new Post();
 			p.setVvID(rs.getInt(1));
 			p.setTopic(topicMap.get(rs.getInt(2)));
