@@ -25,7 +25,7 @@ public class ReadTopics
 		PreparedStatement ps = VVBulletin
 				.getConnection()
 				.getPreparedStatement(
-						"SELECT title, postuserid,dateline,lastpost,forumid,lastpostid,sticky,replycount, postusername, threadid FROM thread");
+						"SELECT title, postuserid,dateline,lastpost,forumid,lastpostid,sticky,replycount, postusername, threadid FROM thread where threadid=26188");
 		ResultSet rs = ps.executeQuery();
 		while (rs.next())
 		{
