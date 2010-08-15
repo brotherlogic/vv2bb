@@ -1,5 +1,6 @@
 package uk.co.brotherlogic.forum;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,7 @@ import uk.co.brotherlogic.forum.wordpress.WordPress;
  */
 public class Transfer
 {
-	public static void main(String[] args) throws SQLException
+	public static void main(String[] args) throws SQLException, IOException
 	{
 		ReadUsers rUsers = new ReadUsers();
 		ReadForums rForums = new ReadForums();

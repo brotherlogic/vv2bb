@@ -1,5 +1,6 @@
 package uk.co.brotherlogic.forum.wordpress;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +11,7 @@ import uk.co.brotherlogic.forum.atoms.Post;
 
 public class WPPosts
 {
-	public void storePost(Set<Post> posts) throws SQLException
+	public void storePost(Set<Post> posts) throws SQLException, IOException
 	{
 		int count = 0;
 		for (Post p : posts)
@@ -42,6 +43,9 @@ public class WPPosts
 			ps.close();
 
 			p.setWpID(res);
+
+			// Get the user avatar
+			p.getPoster().procAvatar();
 		}
 	}
 }

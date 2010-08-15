@@ -15,12 +15,13 @@ public class ReadUsers
 		List<User> users = new LinkedList<User>();
 
 		PreparedStatement ps = VVBulletin.getConnection().getPreparedStatement(
-				"SELECT userid,username,email FROM user");
+				"SELECT userid,username,email,avatarrevision FROM user");
 		ResultSet rs = ps.executeQuery();
 		while (rs.next())
 		{
 			User user = new User(rs.getInt(1), rs.getString(2),
 					rs.getString(2), rs.getString(3));
+			user.setAvatar_revision(rs.getInt(4));
 			users.add(user);
 		}
 
