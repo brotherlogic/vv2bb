@@ -7,7 +7,8 @@ import java.sql.SQLException;
 
 import uk.co.brotherlogic.forum.TransferProperties;
 
-public class VVBulletin {
+public class VVBulletin
+{
 
 	private static VVBulletin singleton;
 
@@ -18,19 +19,23 @@ public class VVBulletin {
 	 * @throws SQLException
 	 *             if a db connection cannot be established
 	 */
-	public static VVBulletin getConnection() throws SQLException {
-		if (singleton == null) {
+	public static VVBulletin getConnection() throws SQLException
+	{
+		if (singleton == null)
+		{
 			singleton = new VVBulletin();
 		}
 		return singleton;
 	}
 
-	private VVBulletin() throws SQLException {
+	private VVBulletin() throws SQLException
+	{
 		makeConnection();
 	}
 
 	public PreparedStatement getPreparedStatement(final String sql)
-			throws SQLException {
+			throws SQLException
+	{
 		// Create the statement
 		PreparedStatement ps = locDB.prepareStatement(sql);
 		return ps;
@@ -45,12 +50,15 @@ public class VVBulletin {
 	 * @throws SQLException
 	 *             if something fails
 	 */
-	private void makeConnection() throws SQLException {
-		try {
+	private void makeConnection() throws SQLException
+	{
+		try
+		{
 			// Load all the drivers and initialise the database connection
 			Class.forName("com.mysql.jdbc.Driver");
 
-			System.err.println("Connecting to production database");
+			System.err.println("Connecting to production database "
+					+ TransferProperties.getProperty("vvhost"));
 			locDB = DriverManager.getConnection("jdbc:mysql://"
 					+ TransferProperties.getProperty("vvhost") + "/"
 					+ TransferProperties.getProperty("vvdatabase") + "?user="
@@ -59,7 +67,9 @@ public class VVBulletin {
 
 			// Switch off auto commit
 			locDB.setAutoCommit(false);
-		} catch (ClassNotFoundException e) {
+		}
+		catch (ClassNotFoundException e)
+		{
 			throw new SQLException(e);
 		}
 	}

@@ -25,7 +25,7 @@ public class ReadTopics
 		PreparedStatement ps = VVBulletin
 				.getConnection()
 				.getPreparedStatement(
-						"SELECT title, postuserid,dateline,lastpost,forumid,lastpostid,sticky,replycount, postusername, threadid FROM thread where threadid=26188");
+						"SELECT title, postuserid,dateline,lastpost,forumid,lastpostid,sticky,replycount, postusername, threadid FROM thread where threadid = 28301");
 		ResultSet rs = ps.executeQuery();
 		while (rs.next())
 		{
@@ -46,7 +46,7 @@ public class ReadTopics
 			t.setLastPostTime(new Date(rs.getInt(4)));
 			t.setForum(forumMap.get(rs.getInt(5)));
 			t.setSticky(rs.getInt(7) == 1);
-			t.setReplyCount(rs.getInt(8));
+			t.setReplyCount(rs.getInt(8) + 1);
 			t.setVvID(rs.getInt(10));
 
 			topics.add(t);

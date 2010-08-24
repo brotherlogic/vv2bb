@@ -13,13 +13,15 @@ public class WPForums
 		PreparedStatement ps = BBPress
 				.getConnection()
 				.getPreparedStatement(
-						"INSERT INTO bb_forums (forum_name,forum_desc,forum_parent) VALUES (?,?,?)");
+						"INSERT INTO bb_forums (forum_name,forum_desc,forum_parent,topics,posts) VALUES (?,?,?,?,?)");
 		ps.setString(1, f.getTitle());
 		ps.setString(2, f.getDescription());
 		if (f.getParentForum() != null)
 			ps.setInt(3, f.getParentForum().getWpID());
 		else
 			ps.setInt(3, 0);
+		ps.setInt(4, f.getTopicCount());
+		ps.setInt(5, f.getReplyCount());
 		ps.execute();
 
 		PreparedStatement ps2 = BBPress.getConnection().getPreparedStatement(

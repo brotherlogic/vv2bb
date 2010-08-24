@@ -77,14 +77,22 @@ public class Post implements Comparable<Post>
 		this.postTime = postTime;
 	}
 
+	static int MAX_LENGTH = 64000;
+
 	public String getText()
 	{
+
 		return text;
 	}
 
 	public void setText(String text)
 	{
-		this.text = text;
+		if (text.length() > MAX_LENGTH)
+		{
+			System.err.println("TRUNCATING: " + vvID);
+			this.text = text.substring(0, MAX_LENGTH);
+		} else
+			this.text = text;
 	}
 
 	public String getIp()

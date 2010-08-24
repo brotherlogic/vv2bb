@@ -28,6 +28,7 @@ public class Transfer
 {
 	public static void main(String[] args) throws SQLException, IOException
 	{
+		long sTime = System.currentTimeMillis();
 		ReadUsers rUsers = new ReadUsers();
 		ReadForums rForums = new ReadForums();
 		ReadTopics rTopics = new ReadTopics();
@@ -86,5 +87,7 @@ public class Transfer
 		for (Topic t : topics)
 			wpPosts.storePost(t.getPosts());
 
+		System.err.println("Time: " + (System.currentTimeMillis() - sTime)
+				/ 1000 + "s");
 	}
 }

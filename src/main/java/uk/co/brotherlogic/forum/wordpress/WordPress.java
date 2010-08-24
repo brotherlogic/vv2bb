@@ -7,7 +7,8 @@ import java.sql.SQLException;
 
 import uk.co.brotherlogic.forum.TransferProperties;
 
-public class WordPress {
+public class WordPress
+{
 
 	private static WordPress singleton;
 
@@ -18,19 +19,23 @@ public class WordPress {
 	 * @throws SQLException
 	 *             if a db connection cannot be established
 	 */
-	public static WordPress getConnection() throws SQLException {
-		if (singleton == null) {
+	public static WordPress getConnection() throws SQLException
+	{
+		if (singleton == null)
+		{
 			singleton = new WordPress();
 		}
 		return singleton;
 	}
 
-	private WordPress() throws SQLException {
+	private WordPress() throws SQLException
+	{
 		makeConnection();
 	}
 
 	public PreparedStatement getPreparedStatement(final String sql)
-			throws SQLException {
+			throws SQLException
+	{
 		// Create the statement
 		PreparedStatement ps = locDB.prepareStatement(sql);
 		return ps;
@@ -45,12 +50,15 @@ public class WordPress {
 	 * @throws SQLException
 	 *             if something fails
 	 */
-	private void makeConnection() throws SQLException {
-		try {
+	private void makeConnection() throws SQLException
+	{
+		try
+		{
 			// Load all the drivers and initialise the database connection
 			Class.forName("com.mysql.jdbc.Driver");
 
-			System.err.println("Connecting to production database");
+			System.err.println("Connecting to production database "
+					+ TransferProperties.getProperty("wphost"));
 			locDB = DriverManager.getConnection("jdbc:mysql://"
 					+ TransferProperties.getProperty("wphost") + "/"
 					+ TransferProperties.getProperty("wpdatabase") + "?user="
@@ -59,12 +67,15 @@ public class WordPress {
 
 			// Switch off auto commit
 			locDB.setAutoCommit(false);
-		} catch (ClassNotFoundException e) {
+		}
+		catch (ClassNotFoundException e)
+		{
 			throw new SQLException(e);
 		}
 	}
 
-	public void prepare() throws SQLException {
+	public void prepare() throws SQLException
+	{
 		PreparedStatement ps = getPreparedStatement("DELETE FROM wp_users WHERE ID > 1");
 		ps.execute();
 		ps.close();

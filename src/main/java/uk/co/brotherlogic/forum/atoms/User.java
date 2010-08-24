@@ -36,9 +36,10 @@ public class User
 
 	public void procAvatar() throws SQLException
 	{
-		try
+		if (!avatar_done)
 		{
-			if (!avatar_done)
+
+			try
 			{
 				// Get the avatar
 				String avatar_out = AV_BASE + username.toLowerCase() + ".png";
@@ -48,7 +49,6 @@ public class User
 					// Load the previous URL
 					String url = "http://verygoodplus.co.uk/customavatars/avatar"
 							+ vv_userid + "_" + avatar_revision + ".gif";
-					System.err.println(url + "=>" + avatar_out);
 					RenderedImage img = ImageIO.read(new URL(url));
 					ImageIO.write(img, "png", new File(avatar_out));
 
@@ -62,13 +62,14 @@ public class User
 				ps.setString(3, username.toLowerCase() + ".png");
 				ps.execute();
 				ps.close();
-				avatar_done = true;
+			}
+			catch (IOException e)
+			{
+				// Pass
 			}
 		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
+
+		avatar_done = true;
 
 	}
 

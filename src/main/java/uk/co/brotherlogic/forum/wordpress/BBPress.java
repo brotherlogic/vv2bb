@@ -7,7 +7,8 @@ import java.sql.SQLException;
 
 import uk.co.brotherlogic.forum.TransferProperties;
 
-public class BBPress {
+public class BBPress
+{
 
 	private static BBPress singleton;
 
@@ -18,19 +19,23 @@ public class BBPress {
 	 * @throws SQLException
 	 *             if a db connection cannot be established
 	 */
-	public static BBPress getConnection() throws SQLException {
-		if (singleton == null) {
+	public static BBPress getConnection() throws SQLException
+	{
+		if (singleton == null)
+		{
 			singleton = new BBPress();
 		}
 		return singleton;
 	}
 
-	private BBPress() throws SQLException {
+	private BBPress() throws SQLException
+	{
 		makeConnection();
 	}
 
 	public PreparedStatement getPreparedStatement(final String sql)
-			throws SQLException {
+			throws SQLException
+	{
 		// Create the statement
 		PreparedStatement ps = locDB.prepareStatement(sql);
 		return ps;
@@ -45,12 +50,15 @@ public class BBPress {
 	 * @throws SQLException
 	 *             if something fails
 	 */
-	private void makeConnection() throws SQLException {
-		try {
+	private void makeConnection() throws SQLException
+	{
+		try
+		{
 			// Load all the drivers and initialise the database connection
 			Class.forName("com.mysql.jdbc.Driver");
 
-			System.err.println("Connecting to production database");
+			System.err.println("Connecting to production database "
+					+ TransferProperties.getProperty("bbhost"));
 			locDB = DriverManager.getConnection("jdbc:mysql://"
 					+ TransferProperties.getProperty("bbhost") + "/"
 					+ TransferProperties.getProperty("bbdatabase") + "?user="
@@ -59,12 +67,15 @@ public class BBPress {
 
 			// Switch off auto commit
 			locDB.setAutoCommit(false);
-		} catch (ClassNotFoundException e) {
+		}
+		catch (ClassNotFoundException e)
+		{
 			throw new SQLException(e);
 		}
 	}
 
-	public void prepare() throws SQLException {
+	public void prepare() throws SQLException
+	{
 		PreparedStatement ps = getPreparedStatement("DELETE FROM bb_forums");
 		ps.execute();
 		ps.close();
@@ -72,6 +83,10 @@ public class BBPress {
 		PreparedStatement ps2 = getPreparedStatement("DELETE FROM bb_topics");
 		ps2.execute();
 		ps2.close();
+
+		PreparedStatement ps3 = getPreparedStatement("DELETE FROM bb_posts");
+		ps3.execute();
+		ps3.close();
 	}
 
 }

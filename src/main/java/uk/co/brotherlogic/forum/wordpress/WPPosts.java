@@ -26,6 +26,7 @@ public class WPPosts
 			ps.setDate(4, new Date(p.getPostTime().getTime()));
 			ps.setString(5, p.getText());
 			ps.setString(6, p.getIp());
+
 			ps.execute();
 
 			PreparedStatement ps2 = BBPress

@@ -23,7 +23,7 @@ public class ReadPosts
 		PreparedStatement ps = VVBulletin
 				.getConnection()
 				.getPreparedStatement(
-						"SELECT postid,threadid,userid,dateline,pagetext,ipaddress FROM post where threadid=26188");
+						"SELECT postid,threadid,userid,dateline,pagetext,ipaddress FROM post where threadid = 28301");
 		ResultSet rs = ps.executeQuery();
 		while (rs.next())
 		{
@@ -35,8 +35,6 @@ public class ReadPosts
 			p.setPostTime(new Date(rs.getLong(4) * 1000));
 			p.setText(convertPost(rs.getString(5)));
 			p.setIp(rs.getString(6));
-
-			System.err.println(rs.getString(5));
 
 			p.getTopic().addPost(p);
 		}

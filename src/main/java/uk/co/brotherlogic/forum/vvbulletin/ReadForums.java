@@ -12,6 +12,12 @@ import uk.co.brotherlogic.forum.atoms.Forum;
 
 public class ReadForums
 {
+	public static void main(String[] args) throws SQLException
+	{
+		ReadForums rf = new ReadForums();
+		System.out.println(rf.readForums().size());
+	}
+
 	public List<Forum> readForums() throws SQLException
 	{
 		List<Forum> forums = new LinkedList<Forum>();
@@ -38,7 +44,7 @@ public class ReadForums
 		PreparedStatement ps2 = VVBulletin
 				.getConnection()
 				.getPreparedStatement(
-						"SELECT forumid,title,parentid,description FROM forum where parentid > -1");
+						"SELECT forumid,title,parentid,description,threadcount,replycount FROM forum where parentid > -1");
 		ResultSet rs2 = ps2.executeQuery();
 		while (rs2.next())
 		{
@@ -47,17 +53,13 @@ public class ReadForums
 			f.setTitle(rs2.getString(2));
 			f.setVvID(rs2.getInt(1));
 			f.setDescription(rs2.getString(4));
+			f.setTopicCount(rs2.getInt(5));
+			f.setReplyCount(rs2.getInt(6));
 
 			forums.add(f);
 		}
 		rs2.close();
 
 		return forums;
-	}
-
-	public static void main(String[] args) throws SQLException
-	{
-		ReadForums rf = new ReadForums();
-		System.out.println(rf.readForums().size());
 	}
 }
